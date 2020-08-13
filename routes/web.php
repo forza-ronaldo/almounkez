@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +17,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    Auth::routes();
 
-Auth::routes();
+    Route::get('/home', 'HomeController@index')->name('home')->middleware('accountIsActivated');
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('accountIsActivated');
+    Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled');
+    Route::get('verify/{token}', 'verifyController@verify')->name('verify');
+    Route::post('reSendEmailVerified/{user}', 'verifyController@reSendEmailVerified')->name('reSendEmailVerified');
 
-Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled');
-Route::get('verify/{token}', 'verifyController@verify')->name('verify');
-Route::post('reSendEmailVerified/{user}', 'verifyController@reSendEmailVerified')->name('reSendEmailVerified');
-
-Route::get('resetPassword', 'resetPasswordController@showResetPasswordForm')->name('showResetPasswordForm');
-Route::post('searchYourAccount', 'resetPasswordController@searchYourAccount')->name('searchYourAccount');
-Route::get('showSetNewPassword/{token_reset_password}', 'resetPasswordController@showsetNewPassword')->name('showSetNewPassword');
-Route::post('setNewPassword/{token_reset_password}', 'resetPasswordController@setNewPassword')->name('setNewPassword');
-Route::middleware('auth')->group(function () {
-    Route::middleware(['accountIsActivated'])->group(function () {
-        Route::resource('user', 'userController')->only('edit', 'update');
+    Route::get('resetPassword', 'resetPasswordController@showResetPasswordForm')->name('showResetPasswordForm');
+    Route::post('searchYourAccount', 'resetPasswordController@searchYourAccount')->name('searchYourAccount');
+    Route::get('showSetNewPassword/{token_reset_password}', 'resetPasswordController@showsetNewPassword')->name('showSetNewPassword');
+    Route::post('setNewPassword/{token_reset_password}', 'resetPasswordController@setNewPassword')->name('setNewPassword');
+    Route::middleware('auth')->group(function () {
+        Route::middleware(['accountIsActivated'])->group(function () {
+            Route::resource('user', 'userController')->only('edit', 'update');
+        });
     });
 });
+

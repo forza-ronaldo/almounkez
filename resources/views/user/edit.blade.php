@@ -3,7 +3,7 @@
     <div class="card w-50 m-auto">
         <div class="card-header-pills">
             <h4>
-                اعدادات الملف الشخصي
+                @lang('site.profile_settings')
             </h4>
         </div>
         <div class="card-body">
@@ -11,7 +11,7 @@
                 @method("PUT")
                 @csrf()
                 <div>
-                    <label>name</label>
+                    <label>@lang('site.name')</label>
                     <input class="form-control @error('name') is-invalid @enderror()" type="text" name="name" value="{{$user->name}}">
                     @error('name')
                     <div class=" alert-sm alert-danger mt-1">
@@ -20,7 +20,7 @@
                     @enderror()
                 </div>
                 <div>
-                    <label>كلمة السر الحالية </label>
+                    <label> @lang('site.current_password')</label>
                     <input class="form-control @error('current_password') is-invalid @enderror()" type="password" name="current_password" >
                     @error('current_password')
                     <div class=" alert-sm alert-danger mt-1">
@@ -34,7 +34,7 @@
                     @endisset()
                 </div>
                 <div>
-                    <label>كلمة السر الجديدة</label>
+                    <label>@lang('site.new_password')</label>
                     <input class="form-control @error('password') is-invalid @enderror()" type="password" name="password">
                     @error('password')
                     <div class=" alert-sm alert-danger mt-1">
@@ -43,7 +43,7 @@
                     @enderror()
                 </div>
                 <div>
-                    <label>تاكيد كلمة السر</label>
+                    <label>@lang('site.confirme_pass')</label>
                     <input class="form-control" type="password" name="password_confirmation">
 
                 </div>
