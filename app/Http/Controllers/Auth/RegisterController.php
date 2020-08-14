@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'token_verify'=>Str::random(25),
+            'group_id'=>0,
         ]);
         $user->sendVerificationEmail();
         Notification::send(User::all(),new registerNewUser($user));

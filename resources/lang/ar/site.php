@@ -1,6 +1,7 @@
 <?php
 return [
     'Home' => 'الرئيسية',
+    'users' => 'المستخدمين',
     'admin' => 'المشرفين',
     'First' => 'الاسم الاول',
     'Last' => 'االاسم الاخير',
@@ -67,6 +68,6 @@ return [
     'question' => 'الاسئلة',
     'text_question' => 'السؤال',
     'text_answer' => 'الجواب',
-    'send message'=>'ارسال رسالة',
+    'send_message'=>'ارسال رسالة',
     'logout'=>'تسجيل خروج',
 ];

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('group_id');
             $table->string('token_reset_password')->nullable();
             $table->string('token_verify')->nullable();
             $table->string('image')->default('default.png');

@@ -45,13 +45,11 @@
                 <div>
                     <label>@lang('site.confirme_pass')</label>
                     <input class="form-control" type="password" name="password_confirmation">
-
                 </div>
                 <div class=" d-flex ">
                     <input class="btn btn-outline-success mt-3 mr-1 form-control-sm " type="submit" value="حفظ">
                     <button class="btn btn-outline-danger mt-3 form-control-sm "><a href="{{url()->previous()}}" ></a>رجوع</button>
                 </div>
-
             </form>
         </div>
 

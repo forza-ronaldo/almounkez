@@ -26,7 +26,7 @@ Route::group(
 
     Route::get('/home', 'HomeController@index')->name('home')->middleware('accountIsActivated');
 
-    Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled');
+    Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled')->middleware('guest');
     Route::get('verify/{token}', 'verifyController@verify')->name('verify');
     Route::post('reSendEmailVerified/{user}', 'verifyController@reSendEmailVerified')->name('reSendEmailVerified');
 
@@ -34,6 +34,7 @@ Route::group(
     Route::post('searchYourAccount', 'resetPasswordController@searchYourAccount')->name('searchYourAccount');
     Route::get('showSetNewPassword/{token_reset_password}', 'resetPasswordController@showsetNewPassword')->name('showSetNewPassword');
     Route::post('setNewPassword/{token_reset_password}', 'resetPasswordController@setNewPassword')->name('setNewPassword');
+
     Route::middleware('auth')->group(function () {
         Route::middleware(['accountIsActivated'])->group(function () {
             Route::resource('user', 'userController')->only('edit', 'update');

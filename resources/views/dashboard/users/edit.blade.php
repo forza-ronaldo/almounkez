@@ -12,6 +12,12 @@
                 <label>email</label>
                 <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{  $user->email }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
             </div>
+            <div>
+                <label>@lang('site.permissions')</label><br>
+                @foreach(\App\User::getPermission() as $role=>$number)
+                    <input class="" type="checkbox" name="permissions[]" value="{{$number}}" {{$user->checkRole($role)?'checked':''}}> {{$role}}
+                @endforeach()
+            </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

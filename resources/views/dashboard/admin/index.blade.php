@@ -1,9 +1,5 @@
-
 @extends('layouts.dashboard.app')
-
 @section('content')
-
-
 <div class="container">
     @if(session()->has('success'))
         <div class="alert alert-info">{{session()->get('success')}}</div>
@@ -12,14 +8,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-3 text-center">@lang('site.users') <small>{{ $users->total() }}</small></h3>
+                    <h3 class="mb-3 text-center">@lang('site.admin') <small>{{ $users->total() }}</small></h3>
                     <div class="row">
-                        <form class="row col-10" action="{{route('dashboard.user.index')}}">
+                        <form class="row col-10" action="{{route('dashboard.admin.index')}}">
                         <input class="form-control col-9" type="text" name="search"  placeholder="search" value="{{ request()->search }}">
                         <button class=" btn-primary form-control col-2"><a>@lang('site.search')</a></button>
                         </form>
                         @if(auth()->user()->hasPermission('users_create'))
-                          <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.user.create')}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
+                          <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.admin.create')}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
                         @endif()
                     </div>
                 </div>
@@ -46,16 +42,12 @@
                             <td>
                                 @if(auth()->user()->hasPermission('users_update'))
                                 <button class="btn btn-sm btn-success">
-                                        <a style="color: white;text-decoration: none" href={{route('dashboard.user.edit',$user->id)}}><i class="fa fa-edit" aria-hidden="true"></i>@lang('site.edit')</a>
+                                        <a style="color: white;text-decoration: none" href={{route('dashboard.admin.edit',$user->id)}}><i class="fa fa-edit" aria-hidden="true"></i>@lang('site.edit')</a>
                                     </button>
                                 @endif()
-                                @if(auth()->user()->hasPermission('users_send_message'))
-                                        <button class="btn btn-sm btn-info">
-                                        <a style="color: white;text-decoration: none" href={{route('dashboard.user.showFormSendMessage',$user->id)}}><i class="fa fa-send-o" aria-hidden="true"></i>@lang('site.send_message')</a>
-                                    </button>
-                                @endif()
+
                                 @if(auth()->user()->hasPermission('users_delete'))
-                                    <form class="d-inline" action="{{route('dashboard.user.destroy',$user->id)}}" method="post">
+                                    <form class="d-inline" action="{{route('dashboard.admin.destroy',$user->id)}}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-sm btn-danger" onclick="confirm('are your sure')"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('site.delete')</button>
@@ -74,6 +66,6 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection
 
 
