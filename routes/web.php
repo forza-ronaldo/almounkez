@@ -26,9 +26,9 @@ Route::group(
 
     Route::get('/home', 'HomeController@index')->name('home')->middleware('accountIsActivated');
 
-    Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled')->middleware('guest');
+    Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled')->middleware('accountIsActive');
     Route::get('verify/{token}', 'verifyController@verify')->name('verify');
-    Route::post('reSendEmailVerified/{user}', 'verifyController@reSendEmailVerified')->name('reSendEmailVerified');
+    Route::post('reSendEmailVerified/{user}', 'verifyController@reSendEmailVerified')->name('reSendEmailVerified')->middleware('accountIsActive');
 
     Route::get('resetPassword', 'resetPasswordController@showResetPasswordForm')->name('showResetPasswordForm');
     Route::post('searchYourAccount', 'resetPasswordController@searchYourAccount')->name('searchYourAccount');

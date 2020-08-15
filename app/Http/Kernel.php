@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\accountIsActive;
 use App\Http\Middleware\checkIsAdmin;
 use App\Http\Middleware\VerifyAccountActivation;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -72,5 +73,6 @@ class Kernel extends HttpKernel
         'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
         'checkIsAdmin'=>checkIsAdmin::class,
+        'accountIsActive'=>accountIsActive::class,
     ];
 }

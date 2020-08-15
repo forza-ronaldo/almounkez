@@ -48,7 +48,7 @@
                             </a>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa fa-bell-o"></i>
+                                <i class="fa fa-bell-o"></i>{{count(auth()->user()->unreadNotifications)}}
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right"  style="width: 400px;height: 318px;overflow-y: scroll;" aria-labelledby="navbarDropdown1">
