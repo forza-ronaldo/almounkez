@@ -14,7 +14,7 @@
                         <input class="form-control col-9" type="text" name="search"  placeholder="search" value="{{ request()->search }}">
                         <button class=" btn-primary form-control col-2"><a>@lang('site.search')</a></button>
                         </form>
-                        @if(auth()->user()->hasPermission('users_create'))
+                        @if(auth()->user()->hasPermission('admins_create'))
                           <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.admin.create')}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
                         @endif()
                     </div>
@@ -40,13 +40,13 @@
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td>
-                                @if(auth()->user()->hasPermission('users_update'))
+                                @if(auth()->user()->hasPermission('admins_update'))
                                 <button class="btn btn-sm btn-success">
                                         <a style="color: white;text-decoration: none" href={{route('dashboard.admin.edit',$user->id)}}><i class="fa fa-edit" aria-hidden="true"></i>@lang('site.edit')</a>
                                     </button>
                                 @endif()
 
-                                @if(auth()->user()->hasPermission('users_delete'))
+                                @if(auth()->user()->hasPermission('admins_delete'))
                                     <form class="d-inline" action="{{route('dashboard.admin.destroy',$user->id)}}" method="post">
                                     @method('DELETE')
                                     @csrf

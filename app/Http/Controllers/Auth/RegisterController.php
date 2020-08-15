@@ -75,7 +75,8 @@ class RegisterController extends Controller
             'group_id'=>0,
         ]);
         $user->sendVerificationEmail();
-        Notification::send(User::all(),new registerNewUser($user));
+        $users = User::whereRoleIs('super_admin')->orWhereRoleIs('admin')->get();
+        Notification::send($users,new registerNewUser($user));
         return  $user;
     }
 }

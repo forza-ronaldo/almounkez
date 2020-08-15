@@ -21,7 +21,6 @@ class userController extends Controller
     }
     public function index(Request $request)
     {
-
         $users = User::where('group_id',0)->when($request->search, function ($query) use ($request) {
             return $query->where('name', 'like', '%' . $request->search . '%');
         })->paginate(3);

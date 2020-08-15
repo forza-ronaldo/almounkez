@@ -20,7 +20,7 @@ class adminController extends Controller
     }
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->where('group_id',1)->when($request->search, function ($query) use ($request) {
+        $users = User::whereRoleIs('admin')->where('group_id',1)->where('id','<>',auth()->id())->when($request->search, function ($query) use ($request) {
             return $query->where('name', 'like', '%' . $request->search . '%');
         })->paginate(3);
         return view('dashboard.admin.index', compact('users'));
