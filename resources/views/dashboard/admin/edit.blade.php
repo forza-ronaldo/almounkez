@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="{{route('dashboard.admin.update',$user->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('dashboard.admin.update',$admin->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div>
                 <label>name</label>
-                <input class="form-control input mb-1 @error('name') is-invalid @enderror" value="{{  $user->name }}"  type="text" name="name"  placeholder="name" >
+                <input class="form-control input mb-1 @error('name') is-invalid @enderror" value="{{  $admin->name }}"  type="text" name="name"  placeholder="name" >
             </div>
             <div>
                 <label>email</label>
-                <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{  $user->email }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
+                <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{  $admin->email }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
             </div>
 
             {{--start permissions section--}}
@@ -33,7 +33,7 @@
                                     <div class="{{$index==0?'active' :''}} tab-pane " id="{{$model}}">
                                         @foreach($options as $option)
                                             <label>@lang('site.'.$option)</label>
-                                            <input type="checkbox" name="permissions[]" value="{{$model}}_{{$option}}">
+                                            <input type="checkbox" name="permissions[]" value="{{$model}}_{{$option}}" {{$admin->hasPermission($model.'_'.$option)?'checked':''}}>
                                         @endforeach
                                     </div>
                                 @endforeach

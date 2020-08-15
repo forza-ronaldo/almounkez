@@ -40,7 +40,12 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-
+                            <a  class="nav-link" href="{{route('dashboard.admin.index')}}" role="button" >
+                              @lang('site.admin')
+                            </a>
+                            <a  class="nav-link " href="{{route('dashboard.user.index')}}" role="button" >
+                              @lang('site.users')
+                            </a>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <i class="fa fa-bell-o"></i>

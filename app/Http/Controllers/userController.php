@@ -18,7 +18,7 @@ class userController extends Controller
         $request->validate([
             'name' => ['string', 'min:6', 'max:30', 'unique:users,name,' . $user->id],
             'current_password' => ['required', 'string', 'min:8'],
-            'password' => ['string', 'min:8', 'confirmed'],
+            'password' => ['string', 'min:8', 'confirmed','nullable'],
         ]);
         if (Hash::check($request->current_password,  Auth::user()->password)) {
             $request_data = $request->only(['name']);
@@ -27,6 +27,6 @@ class userController extends Controller
             session()->flash('msg', 'تم التعديل بنجاح');
             return redirect(route('home'));
         }
-        return view('user.edit', compact('user'))->with('msg_result_check_pass', 'كلمة السر القديمة غير صحيحة');
+        return view('user.edit', compact('user'))->with('msg_result_check_pass', 'كلمة السر الحالية غير صحيحة');
     }
 }

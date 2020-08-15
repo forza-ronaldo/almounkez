@@ -35,10 +35,8 @@ Route::group(
     Route::get('showSetNewPassword/{token_reset_password}', 'resetPasswordController@showsetNewPassword')->name('showSetNewPassword');
     Route::post('setNewPassword/{token_reset_password}', 'resetPasswordController@setNewPassword')->name('setNewPassword');
 
-    Route::middleware('auth')->group(function () {
-        Route::middleware(['accountIsActivated'])->group(function () {
+    Route::middleware(['auth','accountIsActivated'])->group(function () {
             Route::resource('user', 'userController')->only('edit', 'update');
-        });
     });
 });
 

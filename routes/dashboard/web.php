@@ -7,7 +7,7 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
-    Route::prefix('dashboard')->name('dashboard.')->middleware(['auth','accountIsActivated'])->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->middleware(['auth','accountIsActivated','checkIsAdmin'])->group(function () {
         Route::resource('/admin', 'adminController');
         Route::resource('/user', 'userController');
         Route::get('user/{user}/showFormSendMessage','userController@showFormSendMessage')->name('user.showFormSendMessage');

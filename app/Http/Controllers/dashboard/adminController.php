@@ -20,7 +20,7 @@ class adminController extends Controller
     }
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->when($request->search, function ($query) use ($request) {
+        $users = User::whereRoleIs('admin')->where('group_id',1)->when($request->search, function ($query) use ($request) {
             return $query->where('name', 'like', '%' . $request->search . '%');
         })->paginate(3);
         return view('dashboard.admin.index', compact('users'));
@@ -46,27 +46,27 @@ class adminController extends Controller
         session()->flash('success', 'msg_add');
         return redirect(route('dashboard.admin.index'));
     }
-    public function edit(User $user)
+    public function edit(User $admin)
     {
-        return  view('dashboard.admin.edit')->with('user', $user);
+        return  view('dashboard.admin.edit')->with('admin', $admin);
     }
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $admin)
     {
         $this->validate($request,[
-            'name'=>'required|string|max:255'.Rule::unique('users')->ignore($user->name,'name'),
-            'email'=>'required|string|email', 'max:255'.Rule::unique('users')->ignore($user->email,'email'),
+            'name'=>'required|string|max:255'.Rule::unique('users')->ignore($admin->name,'name'),
+            'email'=>'required|string|email', 'max:255'.Rule::unique('users')->ignore($admin->email,'email'),
         ]);
         $request_data = $request->except('permissions');
-        $user->update($request_data);
+        $admin->update($request_data);
         if ($request->permissions) {
-            $user->syncPermissions($request->permissions);
+            $admin->syncPermissions($request->permissions);
         }
         session()->flash('success', 'msg_edit');
         return redirect(route('dashboard.admin.index'));
     }
-    public function destroy(User $user)
+    public function destroy(User $admin)
     {
-        $user->delete();
+        $admin->delete();
         session()->flash('success', 'msg_delete');
         return redirect(route('dashboard.admin.index'));
     }
