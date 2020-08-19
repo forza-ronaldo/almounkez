@@ -4,7 +4,7 @@
         <div class="title m-b-md">
             @lang('site.Laravel')
         </div>
-
+        {{dd(auth()->user()->checkPermission('update_usaddser'))}}
     </div>
 </div>
 @endsection()

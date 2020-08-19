@@ -120,6 +120,38 @@ class powersManagementController extends Controller
     {
         //
     }
+
+    public function showFormUpdateRolePermission(Request $request, $id)
+    {
+        $role=Role::where('id',$id)->first();
+        $permissions_not_available = Permission::whereDoesntHave('roles', function (Builder $query) use ($id) {
+            $query->where('role_id', '=', $id);
+        })->get();
+        $permissions_available = Permission::whereHas('roles', function (Builder $query) use ($id) {
+            $query->where('role_id', '=',$id);
+        })->get();
+        return view('dashboard.powersManagement.editRolePermission',compact('permissions_available','permissions_not_available','role'));
+    }
+     public function updateRolePermission(Request $request, $id)
+    {
+        $role=Role::where('id',$id)->first();
+        $value=0;
+        foreach (Permission::all() as $perm) {
+            if ($perm->id == $request->permission_id) {
+                if ($role->permissions->find($perm->id)) {
+                    if ($role->permissions->find($perm->id)->pivot->activation == 0) {
+                        $value = 1;
+                    } else {
+                        $value = 0;
+                    }
+                    $role->permissions()->updateExistingPivot($perm->id, ['activation' => $value]);
+                } else {
+                    $role->permissions()->attach($perm->id, ['activation' => 1]);
+                }
+            }
+        }
+        return redirect()->back();
+    }
     public function updateRoleUser(Request $request, $id)
     {
         $user=User::where('id',$id)->first();

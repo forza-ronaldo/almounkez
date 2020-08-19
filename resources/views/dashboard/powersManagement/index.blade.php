@@ -78,7 +78,7 @@
                                                 <a style="color: black;text-decoration: none" href={{route('dashboard.powersManagement.show',$row->pivot->role_id)}}>@lang('site.show user')</a>
                                             </button>
                                             <button class="dropdown-item" type="button">
-                                                <a style="color: black;text-decoration: none" href={{route('dashboard.powersManagement.index')}}>@lang('site.Modify his powers')</a>
+                                                <a style="color: black;text-decoration: none" href={{route('dashboard.powersManagement.show.form.update.role_permission',$row->pivot->role_id)}}>@lang('site.Modify his powers')</a>
                                             </button>
 
                                         </div>

@@ -11,7 +11,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-        public function permissions()
+    public function checkPermission($permission)
+    {
+        $permission=Permission::where('name',$permission)->first();
+        if(!$permission)
+            return false;
+        return $this->permissions->find($permission->id)->pivot->activation==1?true:false;
+    }
+    public function permissions()
     {
         return $this->belongsToMany(Permission::class,'permission_user')->withPivot('activation');
     }
