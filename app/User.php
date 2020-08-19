@@ -10,7 +10,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
     public function checkPermission($permission)
     {
         $permission=Permission::where('name',$permission)->first();
