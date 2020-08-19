@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard.app')
 @section('content')
     <div class="container">
         <form action="{{route('dashboard.user.update',$user->id)}}" method="post" enctype="multipart/form-data">
@@ -12,7 +12,29 @@
                 <label>email</label>
                 <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{  $user->email }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
             </div>
+{{--            @foreach($roles as $role)--}}
+{{--                @forelse($user->roles as $ro)--}}
+{{--                    @if($ro->id==$role->id)--}}
+{{--                    {{$role->name}} <input type="checkbox" {{$ro->id==$role->id?'checked':''}} value="{{$role->id}}" name="role[]">--}}
+{{--                    @endif()--}}
+{{--                @empty--}}
+{{--                    {{$role->name}} <input type="checkbox"  value="{{$role->id}}" name="role[]">--}}
+{{--                @endforelse()--}}
+{{--            @endforeach()--}}
+            <td>
+                <img src="{{asset('Uploads/UserImage/'.$user->image)}}" width="200">
+            </td>
 
+            <div class="mt-3">
+                <label>@lang('site.image')</label>
+                <input class="mb-1 @error('image') is-invalid @enderror" value="{{ old('image') }}"  type="file" name="image"  >
+            </div>
+            @foreach($roles_available as $role)
+                {{$role->name}} <input type="checkbox" {{$role->users->find($user->id)->pivot->activation==1?'checked':''}}    value="{{$role->id}}" name="role[]">
+            @endforeach()
+            @foreach($roles_not_available as $role)
+                {{$role->name}} <input type="checkbox"   value="{{$role->id}}" name="role[]">
+            @endforeach()
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

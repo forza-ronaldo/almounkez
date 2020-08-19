@@ -302,7 +302,7 @@ return [
     //
     // Automatically determine locale from browser (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language)
     // on first call if it's not defined in the URL. Redirect user to computed localized url.
-    // For example, if users browser language is `de`, and `de` is active in the array `supportedLocales`,
+    // For example, if UserImage browser language is `de`, and `de` is active in the array `supportedLocales`,
     // the `/about` would be redirected to `/de/about`.
     //
     // The locale will be stored in session and only be computed from browser

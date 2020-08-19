@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4c319732ee921755d2f8aa5135261b0",
+    "content-hash": "70e428613666f7eeb4ccf234561e29f4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -103,6 +103,42 @@
                 "math"
             ],
             "time": "2020-04-15T15:59:35+00:00"
+        },
+        {
+            "name": "carlos-meneses/laravel-mpdf",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/carlos-meneses/laravel-mpdf.git",
+                "reference": "17b94dfdf8723d7e42a52a102e363e733887a7e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carlos-meneses/laravel-mpdf/zipball/17b94dfdf8723d7e42a52a102e363e733887a7e4",
+                "reference": "17b94dfdf8723d7e42a52a102e363e733887a7e4",
+                "shasum": ""
+            },
+            "require": {
+                "mpdf/mpdf": "^8.0",
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Meneses\\LaravelMpdf\\": "src/LaravelMpdf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Mpdf: Using Mpdf in Laravel 5 for generate Pdfs.",
+            "keywords": [
+                "laravel",
+                "mpdf",
+                "pdf"
+            ],
+            "time": "2019-08-08T03:03:39+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -702,30 +738,50 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
-            "name": "kkszymanowski/traitor",
-            "version": "0.2.5",
+            "name": "intervention/image",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KKSzymanowski/Traitor.git",
-                "reference": "9770fc7de72ff585601dc9c42b31715d9fc40a24"
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KKSzymanowski/Traitor/zipball/9770fc7de72ff585601dc9c42b31715d9fc40a24",
-                "reference": "9770fc7de72ff585601dc9c42b31715d9fc40a24",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^1.0|^2.0|^3.0|^4.0",
-                "php": ">=5.4"
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.1"
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Traitor\\": "src/"
+                    "Intervention\\Image\\": "src/Intervention/Image"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -734,17 +790,22 @@
             ],
             "authors": [
                 {
-                    "name": "Kuba Szymanowski",
-                    "email": "kuba.szymanowski@inf24.pl"
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
                 }
             ],
-            "description": "Add a trait use statement to existing PHP class",
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
             "keywords": [
-                "add",
-                "php",
-                "trait"
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
             ],
-            "time": "2018-04-19T12:24:36+00:00"
+            "time": "2019-11-02T09:15:47+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1093,16 +1154,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "481c0174b9c99b189959e2bb9d6f52188ed1f692"
+                "reference": "6e96f54d82e71f71c4108da33ee96a7f57083710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/481c0174b9c99b189959e2bb9d6f52188ed1f692",
-                "reference": "481c0174b9c99b189959e2bb9d6f52188ed1f692",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/6e96f54d82e71f71c4108da33ee96a7f57083710",
+                "reference": "6e96f54d82e71f71c4108da33ee96a7f57083710",
                 "shasum": ""
             },
             "require": {
@@ -1174,7 +1235,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-08-09T15:57:10+00:00"
+            "time": "2020-08-12T14:23:41+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -1359,6 +1420,123 @@
                 "psr-3"
             ],
             "time": "2020-07-23T08:41:23+00:00"
+        },
+        {
+            "name": "mpdf/mpdf",
+            "version": "v8.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "7daf07f15334ed59a276bd52131dcca48794cdbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/7daf07f15334ed59a276bd52131dcca48794cdbd",
+                "reference": "7daf07f15334ed59a276bd52131dcca48794cdbd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "myclabs/deep-copy": "^1.7",
+                "paragonie/random_compat": "^1.4|^2.0|9.99.99",
+                "php": "^5.6 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0",
+                "psr/log": "^1.0",
+                "setasign/fpdi": "^2.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "mpdf/qrcode": "^1.0.0",
+                "phpunit/phpunit": "^5.0",
+                "squizlabs/php_codesniffer": "^3.5.0",
+                "tracy/tracy": "^2.4"
+            },
+            "suggest": {
+                "ext-bcmath": "Needed for generation of some types of barcodes",
+                "ext-xml": "Needed mainly for SVG manipulation",
+                "ext-zlib": "Needed for compression of embedded resources, such as fonts"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-development": "7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Matěj Humpál",
+                    "role": "Developer, maintainer"
+                },
+                {
+                    "name": "Ian Back",
+                    "role": "Developer (retired)"
+                }
+            ],
+            "description": "PHP library generating PDF files from UTF-8 encoded HTML",
+            "homepage": "https://mpdf.github.io",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "time": "2020-07-15T09:48:00+00:00"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
+                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "replace": {
+                "myclabs/deep-copy": "self.version"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Create deep copies (clones) of your objects",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ],
+            "time": "2020-06-29T13:22:24+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2149,43 +2327,39 @@
             "time": "2020-07-28T16:51:01+00:00"
         },
         {
-            "name": "santigarcor/laratrust",
-            "version": "6.1.1",
+            "name": "setasign/fpdi",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/santigarcor/laratrust.git",
-                "reference": "fdb0bd92d96098d39e22086afe897af4cb2db432"
+                "url": "https://github.com/Setasign/FPDI.git",
+                "reference": "50c388860a73191e010810ed57dbed795578e867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/santigarcor/laratrust/zipball/fdb0bd92d96098d39e22086afe897af4cb2db432",
-                "reference": "fdb0bd92d96098d39e22086afe897af4cb2db432",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/50c388860a73191e010810ed57dbed795578e867",
+                "reference": "50c388860a73191e010810ed57dbed795578e867",
                 "shasum": ""
             },
             "require": {
-                "kkszymanowski/traitor": "^0.2.0",
-                "laravel/framework": "~6.0|~7.0",
-                "php": "^7.2"
+                "ext-zlib": "*",
+                "php": "^5.6 || ^7.0"
+            },
+            "conflict": {
+                "setasign/tfpdf": "<1.31"
             },
             "require-dev": {
-                "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "4.*|5.*",
-                "phpunit/phpunit": "^7.5.15|^8.4|^9.0"
+                "phpunit/phpunit": "~5.7",
+                "setasign/fpdf": "~1.8",
+                "setasign/tfpdf": "1.31",
+                "tecnickcom/tcpdf": "~6.2"
+            },
+            "suggest": {
+                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laratrust\\LaratrustServiceProvider"
-                    ],
-                    "aliases": {
-                        "Laratrust": "Laratrust\\LaratrustFacade"
-                    }
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Laratrust\\": "src/"
+                    "setasign\\Fpdi\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2194,24 +2368,24 @@
             ],
             "authors": [
                 {
-                    "name": "Santiago Garcia",
-                    "homepage": "http://santigarcor.me"
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                },
+                {
+                    "name": "Maximilian Kresse",
+                    "email": "maximilian.kresse@setasign.com",
+                    "homepage": "https://www.setasign.com"
                 }
             ],
-            "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
+            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+            "homepage": "https://www.setasign.com/fpdi",
             "keywords": [
-                "Teams",
-                "acl",
-                "authorization",
-                "laratrust",
-                "laravel",
-                "multiusers",
-                "permissions",
-                "php",
-                "rbac",
-                "roles"
+                "fpdf",
+                "fpdi",
+                "pdf"
             ],
-            "time": "2020-07-10T14:25:09+00:00"
+            "time": "2020-04-28T12:40:35+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4659,54 +4833,6 @@
             "time": "2020-08-11T18:10:13+00:00"
         },
         {
-            "name": "myclabs/deep-copy",
-            "version": "1.10.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
-                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
-            },
-            "require-dev": {
-                "doctrine/collections": "^1.0",
-                "doctrine/common": "^2.6",
-                "phpunit/phpunit": "^7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                },
-                "files": [
-                    "src/DeepCopy/deep_copy.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Create deep copies (clones) of your objects",
-            "keywords": [
-                "clone",
-                "copy",
-                "duplicate",
-                "object",
-                "object graph"
-            ],
-            "time": "2020-06-29T13:22:24+00:00"
-        },
-        {
             "name": "nunomaduro/collision",
             "version": "v4.2.0",
             "source": {
@@ -4929,16 +5055,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.0",
+            "version": "5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "3170448f5769fe19f456173d833734e0ff1b84df"
+                "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/3170448f5769fe19f456173d833734e0ff1b84df",
-                "reference": "3170448f5769fe19f456173d833734e0ff1b84df",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d870572532cd70bc3fab58f2e23ad423c8404c44",
+                "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44",
                 "shasum": ""
             },
             "require": {
@@ -4977,7 +5103,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2020-07-20T20:05:34+00:00"
+            "time": "2020-08-15T11:14:08+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",

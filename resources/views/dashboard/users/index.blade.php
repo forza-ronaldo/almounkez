@@ -12,21 +12,31 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-3 text-center">@lang('site.users') <small>{{ $users->total() }}</small></h3>
+                    <h3 class="mb-3 text-center">@lang('site.UserImage') <small>{{ $users->total() }}</small></h3>
                     <div class="row">
                         <form class="row col-10" action="{{route('dashboard.user.index')}}">
-                        <input class="form-control col-9" type="text" name="search"  placeholder="search" value="{{ request()->search }}">
-                        <button class=" btn-primary form-control col-2"><a>@lang('site.search')</a></button>
+                            <input class="form-control col-9" type="text" name="search"  placeholder="search" value="{{ request()->search }}">
+                            <button class=" btn-primary form-control col-2"><a>@lang('site.search')</a></button>
                         </form>
-                        @if(auth()->user()->hasPermission('users_create'))
-                          <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.user.create')}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
-                        @endif()
+
+{{--                        @if(auth()->user()->hasPermission('users_create'))--}}
+                            <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.user.create')}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
+{{--                        @endif()--}}
                     </div>
+                    <form id="form_table_type" action="{{route('dashboard.user.index')}}">
+                        <span>role</span> <select class="form-control-sm mt-2 select_table_type" name="role">
+                            <option value="all">@lang('site.all')</option>
+                            @foreach($roles as $role)
+                            <option {{request()->role==$role->id?'selected':''}}  value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach()
+                        </select>
+                    </form>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped text-center">
                         <thead>
                         <tr>
+                            <th scope="col">@lang('site.image')</th>
                             <th scope="col">@lang('site.id')</th>
                             <th scope="col">@lang('site.name')</th>
                             <th scope="col">@lang('site.email')</th>
@@ -38,29 +48,36 @@
                         <tbody>
                         @forelse($users as $user)
                         <tr>
+                            <td>
+                                <img src="{{asset('Uploads/UserImage/'.$user->image)}}" width="100" >
+                            </td>
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td>
-                                @if(auth()->user()->hasPermission('users_update'))
-                                <button class="btn btn-sm btn-success">
-                                        <a style="color: white;text-decoration: none" href={{route('dashboard.user.edit',$user->id)}}><i class="fa fa-edit" aria-hidden="true"></i>@lang('site.edit')</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @lang('site.action')
                                     </button>
-                                @endif()
-                                @if(auth()->user()->hasPermission('users_send_message'))
-                                        <button class="btn btn-sm btn-info">
-                                        <a style="color: white;text-decoration: none" href={{route('dashboard.user.showFormSendMessage',$user->id)}}><i class="fa fa-send-o" aria-hidden="true"></i>@lang('site.send_message')</a>
-                                    </button>
-                                @endif()
-                                @if(auth()->user()->hasPermission('users_delete'))
-                                    <form class="d-inline" action="{{route('dashboard.user.destroy',$user->id)}}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-sm btn-danger" onclick="confirm('are your sure')"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('site.delete')</button>
-                                    </form>
-                                @endif()
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="dropdown-item" type="button">
+                                            <a class="btn btn-primary" style="color: white;text-decoration: none" href={{route('dashboard.user.edit',$user->id)}}><i class="fa fa-edit" aria-hidden="true"></i>@lang('site.edit')</a>
+                                        </button>
+                                        <button class="dropdown-item" type="button">
+                                            <a class="btn btn-success" style="color: white;text-decoration: none" href={{route('dashboard.user.showFormSendMessage',$user->id)}}><i class="fa fa-send-o" aria-hidden="true"></i>@lang('site.send_message')</a>
+                                        </button>
+                                        <button class="dropdown-item" type="button">
+                                            <a class="btn btn-info" style="color: white;text-decoration: none" href={{route('dashboard.powersManagement.index',['user_id'=>$user->id])}}><i class="fa fa-send-o" aria-hidden="true"></i>@lang('site.show_permission')</a>
+                                        </button>
+                                        <form class="dropdown-item" action="{{route('dashboard.user.destroy',$user->id)}}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger" onclick="confirm('are your sure')"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('site.delete')</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -74,6 +91,6 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection
 
 

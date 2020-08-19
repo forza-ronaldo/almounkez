@@ -1,8 +1,7 @@
 <?php
 return [
     'Home' => 'الرئيسية',
-    'users' => 'المستخدمين',
-    'admin' => 'المشرفين',
+    'UserImage' => 'المستخدمين',
     'First' => 'الاسم الاول',
     'Last' => 'االاسم الاخير',
     'email' => 'البريد الالكتروني',
@@ -70,4 +69,14 @@ return [
     'text_answer' => 'الجواب',
     'send_message'=>'ارسال رسالة',
     'logout'=>'تسجيل خروج',
+    'go_to_control_panel'=>'الذهاب للوحة التحكم',
+    'Laravel'=>'لارافيل',
+    'Login'=>' تسجيل دخول',
+    'Register'=>'إشتراك',
+    'Remember_Me'=>'تذكرني',
+    'Forgot_Your_Password'=>'نسيت كلمة السر',
+    'You_are_logged_in'=>'لقد سجلت الدخول',
+    'Dashboard'=>'لوحة التحكم',
+    'powers_management'=>'إدارة الصلاحيات',
+
 ];

@@ -16,7 +16,7 @@ class userController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => ['string', 'min:6', 'max:30', 'unique:users,name,' . $user->id],
+            'name' => ['string', 'min:6', 'max:30', 'unique:UserImage,name,' . $user->id],
             'current_password' => ['required', 'string', 'min:8'],
             'password' => ['string', 'min:8', 'confirmed','nullable'],
         ]);

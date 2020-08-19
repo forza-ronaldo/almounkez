@@ -19,7 +19,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration of new UserImage as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -28,7 +28,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect UserImage after registration.
      *
      * @var string
      */
@@ -54,7 +54,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:UserImage'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -72,11 +72,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'token_verify'=>Str::random(25),
-            'group_id'=>0,
         ]);
         $user->sendVerificationEmail();
-        $users = User::whereRoleIs('super_admin')->orWhereRoleIs('admin')->get();
-        Notification::send($users,new registerNewUser($user));
+        //$UserImage = User::whereRoleIs('super_admin')->orWhereRoleIs('powersManagement')->get();
+       // Notification::send($UserImage,new registerNewUser($user));
         return  $user;
     }
 }

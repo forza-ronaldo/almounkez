@@ -20,14 +20,14 @@ class adminController extends Controller
     }
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->where('group_id',1)->where('id','<>',auth()->id())->when($request->search, function ($query) use ($request) {
+        $users = User::whereRoleIs('powersManagement')->where('group_id',1)->where('id','<>',auth()->id())->when($request->search, function ($query) use ($request) {
             return $query->where('name', 'like', '%' . $request->search . '%');
         })->paginate(3);
-        return view('dashboard.admin.index', compact('users'));
+        return view('dashboard.powersManagement.index', compact('users'));
     }
     public function create()
     {
-        return view('dashboard.admin.create');
+        return view('dashboard.powersManagement.create');
     }
     public function store(Request $request)
     {
@@ -41,20 +41,20 @@ class adminController extends Controller
         $request_data['password'] = bcrypt($request->password);
         $request_data['group_id']=1;
         $user = User::create($request_data);
-        $user->attachRole('admin');
+        $user->attachRole('powersManagement');
         $user->syncPermissions($request->permissions);//syncPermissions
         session()->flash('success', 'msg_add');
-        return redirect(route('dashboard.admin.index'));
+        return redirect(route('dashboard.powersManagement.index'));
     }
     public function edit(User $admin)
     {
-        return  view('dashboard.admin.edit')->with('admin', $admin);
+        return  view('dashboard.powersManagement.edit')->with('powersManagement', $admin);
     }
     public function update(Request $request, User $admin)
     {
         $this->validate($request,[
-            'name'=>'required|string|max:255'.Rule::unique('users')->ignore($admin->name,'name'),
-            'email'=>'required|string|email', 'max:255'.Rule::unique('users')->ignore($admin->email,'email'),
+            'name'=>'required|string|max:255'.Rule::unique('UserImage')->ignore($admin->name,'name'),
+            'email'=>'required|string|email', 'max:255'.Rule::unique('UserImage')->ignore($admin->email,'email'),
         ]);
         $request_data = $request->except('permissions');
         $admin->update($request_data);
@@ -62,12 +62,12 @@ class adminController extends Controller
             $admin->syncPermissions($request->permissions);
         }
         session()->flash('success', 'msg_edit');
-        return redirect(route('dashboard.admin.index'));
+        return redirect(route('dashboard.powersManagement.index'));
     }
     public function destroy(User $admin)
     {
         $admin->delete();
         session()->flash('success', 'msg_delete');
-        return redirect(route('dashboard.admin.index'));
+        return redirect(route('dashboard.powersManagement.index'));
     }
 }

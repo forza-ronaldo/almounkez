@@ -24,7 +24,19 @@
             </div>
             <div>
                 <label>@lang('site.confirme_pass')</label>
-                <input class="form-control input mb-1 @error('password_confirmation') is-invalid @enderror" value="{{ old('password_confirmed') }}"  type="password" name="password_confirmation" placeholder="Re-Password" >
+                <input class="form-control  mb-1 @error('password_confirmation') is-invalid @enderror" value="{{ old('password_confirmed') }}"  type="password" name="password_confirmation" placeholder="Re-Password" >
+            </div>
+            <div>
+                <label>@lang('site.image')</label>
+                <input class="mb-1 @error('image') is-invalid @enderror" value="{{ old('image') }}"  type="file" name="image"  >
+            </div>
+            <div>
+                <label>@lang('site.role')</label><br>
+                <select class=" form-control-sm" name="role">
+                    @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                    @endforeach()
+                </select>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">

@@ -1,9 +1,8 @@
 <?php
 return [
     'id' => 'id',
-    'users' => 'users',
+    'UserImage' => 'UserImage',
     'Home' => 'Home',
-    'admin' => 'admin',
     'First' => ' First name',
     'Last' => 'Last name',
     'email' => 'email',
@@ -66,4 +65,14 @@ return [
     'text_answer' => 'text answer',
     'send message'=>'send message',
     'logout'=>'logout',
+    'go_to_control_panel'=>'go to control panel',
+    'Laravel'=>'Laravel',
+    'Login'=>'Login',
+    'Register'=>'Register',
+    'Remember_Me'=>'Remember Me',
+    'Forgot_Your_Password'=>'Forgot Your Password',
+    'You_are_logged_in'=>'You are logged in',
+    'Dashboard'=>'Dashboard',
+    'powers_management'=>'powers Management',
+
 ];

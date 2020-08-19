@@ -12,11 +12,9 @@ class userSeeder extends Seeder
     public function run()
     {
         $user=\App\User::create([
-            'name'=>'super admin',
-            'email'=>'super_admin@admin.com',
+            'name'=>'super powersManagement',
+            'email'=>'super_admin@powersManagement.com',
             'password'=>bcrypt('12345678'),
-            'group_id'=>1
         ]);
-        $user->attachRole('super_admin');
     }
 }

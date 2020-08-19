@@ -22,7 +22,7 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
+     * Where to redirect UserImage after verification.
      *
      * @var string
      */

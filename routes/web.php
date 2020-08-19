@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Mpdf\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,15 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
+Route::get('/', function () {
+    return view('welcome');
+});
     Auth::routes();
-
     Route::get('/home', 'HomeController@index')->name('home')->middleware('accountIsActivated');
 
     Route::get('accountDisabled','verifyController@showInterfaceAccountDisabled')->name('accountDisabled')->middleware('accountIsActive');
@@ -37,6 +37,7 @@ Route::group(
 
     Route::middleware(['auth','accountIsActivated'])->group(function () {
             Route::resource('user', 'userController')->only('edit', 'update');
+            Route::get('pdf','dashboard\userController@pdf')->name('pdf');
     });
 });
 

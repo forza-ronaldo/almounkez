@@ -1,33 +1,21 @@
-
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    @if(session()->has('success'))
+    <div class="container">
+        <form action="{{route('dashboard.powersManagement.update',$admin->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div>
+                <label>name</label>
+                <input class="form-control input mb-1 @error('name') is-invalid @enderror" value="{{  $admin->name }}"  type="text" name="name"  placeholder="name" >
+            </div>
+            <div>
+                <label>email</label>
+                <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{  $admin->email }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
+            </div>
 
-        <div class="alert alert-info">{{session()->get('success')}}</div>
-    @endif
-    <form action="{{route('dashboard.admin.store')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div>
-            <div>
-            <label>@lang('site.name')</label>
-            <input class="form-control input mb-1 @error('name') is-invalid @enderror" value="{{ old('name') }}"  type="text" name="name"  placeholder="name" >
-            </div>
-            <div>
-            <label>@lang('site.email')</label>
-            <input class="form-control input mb-1 @error('email') is-invalid @enderror" value="{{ old('email') }}"  type="email" name="email" placeholder="Email" autocomplete="off" >
-            </div>
-            <div>
-            <label>@lang('site.password')</label>
-            <input class="form-control input mb-1 @error('password') is-invalid @enderror" value="{{ old('password') }}"  type="password" name="password" placeholder="Password" autocomplete="new-password" >
-            </div>
-            <div>
-                <label>@lang('site.confirme_pass')</label>
-                <input class="form-control input mb-1 @error('password_confirmation') is-invalid @enderror" value="{{ old('password_confirmed') }}"  type="password" name="password_confirmation" placeholder="Re-Password" >
-            </div>
             {{--start permissions section--}}
-            <?php $models=['users','admins'];?>
-            <?php $options=['create','read','update','delete','send_message'];?>
+            <?php $models=['UserImage','admins'];?>
+            <?php $options=['create','read','update','delete'];?>
             <div class="row">
                 <div class="col-md-12">
                     <div class="tabbable-panel">
@@ -44,10 +32,8 @@
                                 @foreach($models as $index=>$model)
                                     <div class="{{$index==0?'active' :''}} tab-pane " id="{{$model}}">
                                         @foreach($options as $option)
-                                            @if(!($option=='send_message'&&$model=='admins'))
                                             <label>@lang('site.'.$option)</label>
-                                            <input type="checkbox" name="permissions[]" value="{{$model}}_{{$option}}">
-                                            @endif()
+                                            <input type="checkbox" name="permissions[]" value="{{$model}}_{{$option}}" {{$admin->hasPermission($model.'_'.$option)?'checked':''}}>
                                         @endforeach
                                     </div>
                                 @endforeach
@@ -61,16 +47,14 @@
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                            <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
-
-        <button class="form-control mt-2">@lang('site.add')</button>
-        </div>
-    </form>
-</div>
+            <button class="form-control mt-2">edit</button>
+        </form>
+    </div>
 @endsection
 @push('style')
     <style>
