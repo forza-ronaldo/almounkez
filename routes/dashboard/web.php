@@ -15,6 +15,7 @@ Route::group(
         Route::resource('/user', 'userController');
         Route::get('user/{user}/showFormSendMessage','userController@showFormSendMessage')->name('user.showFormSendMessage');
         Route::post('user/sendMessage/{user}','userController@sendMessage')->name('user.sendMessage');
+        Route::get('users/export/', 'userController@export')->name('excel');
     });
 });
 

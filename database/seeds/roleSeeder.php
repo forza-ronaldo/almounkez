@@ -11,9 +11,13 @@ class roleSeeder extends Seeder
      */
     public function run()
     {
-        \App\Role::create([
+        $role=\App\Role::create([
             'name'=>'super_admin'
         ]);
+        foreach (\App\Permission::all() as $perm)
+        {
+            $role->permissions()->attach($perm->id,['activation'=>1]);
+        }
         \App\Role::create([
             'name'=>'powersManagement'
         ]);

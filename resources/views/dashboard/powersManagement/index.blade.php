@@ -19,7 +19,7 @@
                         <button class=" btn-primary form-control col-2"><a>@lang('site.search')</a></button>
                         </form>
 {{--                        @if(auth()->user->hasPermission('admins_create'))--}}
-                          <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.powersManagement.create',request()->query())}}"><i class="fa fa-plus"></i>@lang('site.add') </a>
+                          <a class="btn btn-primary form-control col-2 "  href="{{route('dashboard.powersManagement.create',request()->query())}}"><i class="fa fa-plus"></i> {{request()->table_type=='role'?__('site.add_role'):__('site.add_permission')  }}</a>
 {{--                        @endif()--}}
                     </div>
                     <form id="form_table_type" action="{{route('dashboard.powersManagement.index')}}">
@@ -28,17 +28,17 @@
                             <option {{request()->table_type=='role'?'selected':''}} value="role">Role</option>
                         </select>
                     </form>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @lang('site.action')
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">
-                                <a style="color: black;text-decoration: none" href={{route('dashboard.powersManagement.index')}}>@lang('site.all')</a>
-                            </button>
-                        </div>
-                    </div>
-                    <a id="pdf" href="#">pdf</a>
+{{--                    <div class="dropdown">--}}
+{{--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                            @lang('site.action')--}}
+{{--                        </button>--}}
+{{--                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">--}}
+{{--                            <button class="dropdown-item" type="button">--}}
+{{--                                <a style="color: black;text-decoration: none" href={{route('dashboard.powersManagement.index')}}>@lang('site.all')</a>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <a id="pdf" href="#">pdf</a>--}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped text-center">

@@ -16,13 +16,12 @@ use Intervention\Image\Facades\Image;
 use function GuzzleHttp\Promise\all;
 use PDF;
 use phpDocumentor\Reflection\Types\Object_;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class userController extends Controller
 {
-    public  function __construct()
-    {
 
-    }
     public function index(Request $request)
     {
         $roles=Role::all(); //where('group_id',$request->table_type)
@@ -177,9 +176,18 @@ class userController extends Controller
     }
     public function destroy(User $user)
     {
-        $user->delete();
-        session()->flash('success', 'msg_delete');
+        $role=Role::where('name','super_admin')->first();
+        $super_admin_count = User::whereHas('roles', function (Builder $query) use ($role){
+            $query->where('role_id', '=', $role->id);
+        })->count();
+        if($super_admin_count!=1) {
+            $user->delete();
+            session()->flash('success', 'msg_delete');
+            return redirect(route('dashboard.user.index'));
+        }
+        session()->flash('success','you can\'t delete the last user');
         return redirect(route('dashboard.user.index'));
+
     }
     public function showFormSendMessage(User $user)
     {
@@ -200,5 +208,33 @@ class userController extends Controller
         $users =User::paginate(5);
         $pdf = PDF::loadView('a', compact('users'));
         return $pdf->stream('document.pdf');
+    }
+    public function export(Request $request)
+    {
+        ob_end_clean();
+        ob_start();
+        $roles=Role::all();
+        $roles_id=collect($roles)->map(function ($a){
+            return $a->id;
+        })->toArray();
+        if(in_array($request->role,$roles_id))
+        {
+
+            $users = User::whereHas('roles', function (Builder $query) use ($request) {
+                $query->where('role_id',$request->role);
+            })->when($request->search, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->search . '%');
+            })->get(['id','name','email','created_at','updated_at']);
+
+        }
+        else
+        {
+            $users = User::when($request->search, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->search . '%');
+            })->get(['id','name','email','created_at','updated_at']);
+        }
+
+//        session()->flash('users',$users);
+        return Excel::download(new UsersExport($users), 'users.xlsx');
     }
 }

@@ -74,5 +74,7 @@ return [
     'You_are_logged_in'=>'You are logged in',
     'Dashboard'=>'Dashboard',
     'powers_management'=>'powers Management',
+    'add_role'=>'add role',
+    'add_permission'=>'add permission',
 
 ];

@@ -78,5 +78,7 @@ return [
     'You_are_logged_in'=>'لقد سجلت الدخول',
     'Dashboard'=>'لوحة التحكم',
     'powers_management'=>'إدارة الصلاحيات',
+    'add_role'=>'إضافة مجموعة',
+    'add_permission'=>'إضافة صلاحية',
 
 ];

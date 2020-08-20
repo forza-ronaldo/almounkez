@@ -33,6 +33,7 @@
                     </form>
                 </div>
                 <div class="card-body">
+                    <a href="{{route('dashboard.excel',request()->query())}}"><img width="40px" src="{{asset('imagesSite/icons8-microsoft-excel-50.png')}}"></a>
                     <table class="table table-striped text-center">
                         <thead>
                         <tr>
