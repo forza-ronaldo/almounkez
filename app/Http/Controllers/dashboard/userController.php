@@ -65,7 +65,7 @@ class userController extends Controller
         $request_data['password'] = bcrypt($request->password);
         if($request->hasFile('image'))
         {
-            Image::make($request->image)->resize(300,null,function ($constraint){
+            Image::make($request->image)->resize(500,null,function ($constraint){
                 $constraint->aspectRatio();
             })->save(public_path('Uploads/UserImage/'.$request->image->hashName()));
             $request_data['image']=$request->image->hashName();

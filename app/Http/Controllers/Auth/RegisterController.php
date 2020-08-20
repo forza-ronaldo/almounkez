@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -54,8 +55,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:UserImage'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => ['image','nullable']
         ]);
     }
 
@@ -73,6 +75,14 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'token_verify'=>Str::random(25),
         ]);
+        if($data['image'])
+        {
+            Image::make($data['image'])->resize(500,null,function ($constraint){
+                $constraint->aspectRatio();
+            })->save(public_path('Uploads/UserImage/'.$data['image']->hashName()));
+            $user->image=$data['image']->hashName();
+            $user->save();
+        }
         $user->sendVerificationEmail();
         //$UserImage = User::whereRoleIs('super_admin')->orWhereRoleIs('powersManagement')->get();
        // Notification::send($UserImage,new registerNewUser($user));

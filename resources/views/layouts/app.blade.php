@@ -85,7 +85,9 @@
                                     </form>
                                 </div>
                             </li>
-
+                            <li class="nav-item">
+                                <img style="border-radius: 10%" width="40" height="40" src="{{asset('Uploads/UserImage/'.auth()->user()->image)}}">
+                            </li>
 
                         @endguest
                     </ul>
